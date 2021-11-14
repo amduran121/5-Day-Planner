@@ -1,17 +1,52 @@
-var currentDay = document.getElementById("currentDay");
-currentDay.append(moment());
+//global variables
+var scheduledHours = [];
+var availableHours = {};
+var m = moment();
+var newDay = moment().hour(0);
+var currentTime = m.hour();
 
-var timeOfDay = document.getElementsByClassName("timeOfDay");
-var timeColor = document.getElementsByClassName("timeColor");
+// adding clock to currentDay id
+  var dateString = moment().format("MMMM Do YYYY, h:mm:ss a");
+  $("#currentDay").html(dateString);
 
-var determineTime = moment().format("HH");
+setInterval(clock, 1000);
 
-console.log(determineTime);
-
-var timeArray = {
-    document.getElementsByClassName
+//generating textareas for scheduling
+for (var hour = 9; hour < 18; hour++) {
+  scheduledHours.push(moment({ hour }).format("h  a"));
+  $(".container").append(<div class='row time-block' data-time='${hour}'>
+       <!--hour column-->
+           <div class='col-sm col-md-2 hour'>
+             <p>${moment({ hour }).format("h  a")}</p>
+           </div>
+        <!--scheduling column-->
+           <div class='col-sm col-md-10 d-flex description'>
+              <div class='input-group'>
+                <textarea class="form-control text-area"></textarea>
+                <div class='input-group-append'>
+                  <button class='save-button d-flex justify-center align-center'>
+                    <i class='far fa-save fa-2x save-icon'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>);
 }
+//Checking time to determine present, past, or future
+$.each($('.time-block'), function(index, value) {
+  let dateHour = $(value).attr('data-time');
+  if (Number(dateHour) === m.hour()) {
+    $(this).find('textarea').addClass('present');
+  } else if (Number(dateHour) < m.hour()) {
+    $(this).find('textarea').addClass('past').attr('disabled', 'disabled');
+    $(this).find('.save-button').addClass('disabled').attr('disabled', true);
+  } else {
+    $(this).find('textarea').addClass('future');
+  }
+});
 
-function changeColor (determineTime) {
-    if (timeOfDay < determineTime)
-}
+console.log(currentTime);
+
+if (currentTime >=0 && currentTime < 9){
+  localStorage.clear();
+  
