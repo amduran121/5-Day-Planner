@@ -50,3 +50,49 @@ console.log(currentTime);
 if (currentTime >=0 && currentTime < 9){
   localStorage.clear();
   
+
+  //If there are items in local storage, get those items...
+  if (localStorage.getItem('availableHours')) {
+      //...those items being set to available hours...
+      // parse them into objects, from local storage 
+  availableHours = JSON.parse(localStorage.getItem('availableHours'));
+} else {
+  availableHours = {
+    '9': {
+      time: '9',
+      value: ''
+    },
+    '10': {
+      time: '10',
+      value: ''
+    },
+    '11': {
+      time: '11',
+      value: ''
+    },
+    '12': {
+      time: '12',
+      value: ''
+    },
+    '13': {
+      time: '13',
+      value: ''
+    },
+    '14': {
+      time: '14',
+      value: ''
+    },
+    '15': {
+      time: '15',
+      value: ''
+    },
+    '16': {
+      time: '16',
+      value: ''
+    },
+    '17': {
+      time: '17',
+      value: ''
+    }
+  };
+}
